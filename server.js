@@ -4,8 +4,6 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 // configure the PORT 
 const PORT = process.env.PORT || 3000;
-// models
-const db = require("./models");
 // initialize express app
 const app = express();
 // use logging software
@@ -18,7 +16,7 @@ app.use(express.json());
 // serve static content for the app from the public directory
 app.use(express.static("public"));
 // routes
-// app.use(require("./routes/api"));
+app.use(require("./routes/api-routes"));
 app.use(require("./routes/html-routes"));
 // set up connection to mongodb using mongoose
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
