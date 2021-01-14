@@ -1,7 +1,7 @@
 // require dependencies
+const mongojs = require("mongojs");
 const router = require("express").Router();
 const db = require("../models/index");
-const mongojs = require("mongojs");
 // route to get all workouts and sort in ascending order. this route is called by api.js getLastWorkout()
 router.get("/api/workouts", (req, res) => {
     db.Workout.find({})
@@ -9,6 +9,10 @@ router.get("/api/workouts", (req, res) => {
             day: 1
         })
         .then(dbWorkouts => {
+
+            // console.log("=======dbWorkouts result=======");
+            // console.log(dbWorkouts);
+
             res.json(dbWorkouts);
         })
         .catch(err => {
@@ -18,19 +22,27 @@ router.get("/api/workouts", (req, res) => {
 // route to add an exercise. this route is called by api.js addExercise(data)
 router.put("/api/workouts/:id", (req, res) => {
     console.log("test put api/workouts/:id route");
-    console.log("============================");
-    let workoutId = mongojs.ObjectId(req.params.id);
-    db.Workout.updateMany({
-            _id: workoutId
-        }, {
-            $push: {
-                ...req.body
-            }
-        })
+    // console.log("==========req.params.id========");
+    // let workoutId = req.params.id;
+    // console.log(req.url);
+    // console.log(workoutId);
+    console.log("===========req.body============");
+    console.log(req.body);
+
+    // this if statement takes care of a bug when adding a new exercise. bug: the user can click complete after clicking add exercise and it will submit an empty form
+    if (req.body.name === "") {
+        console.log("test workoutData =============");
+        return;
+    }
+    db.Workout.insertMany([{
+            exercises: req.body
+        }])
         .then(dbWorkouts => {
             res.json(dbWorkouts);
         })
         .catch(err => {
+            console.log("=========api/workouts/:id error=======");
+            console.log(err);
             res.status(400).json(err);
         });
 });
