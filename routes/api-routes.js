@@ -34,7 +34,9 @@ router.put("/api/workouts/:id", (req, res) => {
         return res.end;
     } else {
         db.Workout.findByIdAndUpdate(workoutId, {
-                exercises: req.body
+                $push: {
+                    exercises: req.body
+                }
             })
             .then(dbWorkouts => {
                 res.json(dbWorkouts);
