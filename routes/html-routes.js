@@ -1,7 +1,6 @@
 // require dependencies
 const router = require("express").Router();
 const path = require("path");
-
 // html routes
 // index route loads index.html
 router.get("/", (req, res) => {
@@ -17,5 +16,5 @@ router.get("/exercise", (req, res) => {
 router.get("/stats", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/stats.html"));
 });
-
+// export router
 module.exports = router;
