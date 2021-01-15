@@ -48,6 +48,7 @@ Please see the following for a list of technologies used in this project:
 * Node.js
 * Express
 * MongoDB
+* Robo 3T
 * Mongoose ODM
 * Git Bash
 * Heroku
@@ -65,18 +66,16 @@ Git for Windows: 2.28.0.1
 
 [Express](https://expressjs.com/)
 
-[Handlebars.js](https://handlebarsjs.com/)
+[MongoDB - Database](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials)
 
-[MySQL - Database](https://dev.mysql.com/downloads/mysql/)
+[Robo 3T - MongoDB GUI](https://www.robomongo.org/)
 
-[MySQL - Workbench](https://dev.mysql.com/downloads/workbench/)
-
-Git clone link: https://github.com/jre23/bear-share.git
+Git clone link: https://github.com/jre23/workout-tracker.git
 
 ## Usage
 
-To run this application on a local machine, make sure all of the programs (or similar) listed in [Installation](#Installation) are installed. Use the provided schema.sql and seeds.sql files to build the database in MySQL Workbench. For setting user passwords with MySQL, reference [MySQL ALTER USER](https://dev.mysql.com/doc/refman/8.0/en/alter-user.html). Make sure the password used is the same as the password in the connection.js file. Clone the repo using the above Git clone link. Navigate to the local repository on your machine where you've cloned it using Git Bash/Terminal and in the directory containing the server.js file. Make sure to install any dependencies using "npm i" (reference the included package.json file). Then use "npm start" to run the app!
+To run this application on a local machine, make sure all of the programs (or similar) listed in [Installation](#Installation) are installed. Use the provided seeds.js file to build the MongoDB database. Clone the repo using the above Git clone link. Navigate to the local repository on your machine where you've cloned it using Git Bash/Terminal and in the directory containing the server.js file. Make sure to install any dependencies using "npm i" (reference the included package.json file). Then use "npm start" to run the app!
 
 ## Credits
 
-This was the fourteenth assignment completed as part of the University of Washington Coding Boot Camp. [UW Coding Boot Camp Home Page](https://bootcamp.uw.edu/coding/)
+This was the fifteenth assignment completed as part of the University of Washington Coding Boot Camp. [UW Coding Boot Camp Home Page](https://bootcamp.uw.edu/coding/)
