@@ -10,8 +10,8 @@ router.get("/api/workouts", (req, res) => {
         })
         .then(dbWorkouts => {
 
-            // console.log("=======dbWorkouts result=======");
-            // console.log(dbWorkouts);
+            console.log("=======dbWorkouts result=======");
+            console.log(dbWorkouts);
 
             res.json(dbWorkouts);
         })
@@ -23,7 +23,7 @@ router.get("/api/workouts", (req, res) => {
 router.put("/api/workouts/:id", (req, res) => {
     console.log("test put api/workouts/:id route");
     console.log("==========req.params.id========");
-    let workoutId = parseInt(req.params.id);
+    let workoutId = req.params.id;
     console.log(req.url);
     console.log(workoutId);
     // console.log("===========req.body============");
@@ -33,14 +33,9 @@ router.put("/api/workouts/:id", (req, res) => {
         console.log("test workoutData =============");
         return res.end;
     } else {
-
-        // db.Workout.findByIdAndUpdate(workoutId, [{
-        //     exercises: req.body
-        // }])
-        db.Workout.insertMany([{
-                custom: workoutId,
+        db.Workout.findByIdAndUpdate(workoutId, {
                 exercises: req.body
-            }])
+            })
             .then(dbWorkouts => {
                 res.json(dbWorkouts);
             })
