@@ -68,7 +68,29 @@ router.post("/api/workouts", (req, res) => {
 });
 // route to get all workouts in a certain range. this route is called by api.js getWorkoutsInRange()
 router.get("/api/workouts/range", (req, res) => {
-    db.Workout.find({})
+    db.Workout.aggregate([{
+                $sort: {
+                    day: -1
+
+                }
+            },
+            {
+                $limit: 7
+            },
+            {
+                $sort: {
+                    day: 1
+
+                }
+            },
+            {
+                $addFields: {
+                    totalDuration: {
+                        $sum: "$exercises.duration"
+                    }
+                }
+            }
+        ])
         .then(dbWorkouts => {
             res.json(dbWorkouts);
         })
