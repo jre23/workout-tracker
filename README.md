@@ -62,15 +62,15 @@ Visual Studio Code: 1.48.2
 Google Chrome: 78.0.3904.130
 Git for Windows: 2.28.0.1
 
-[Node.js](https://nodejs.org/en/)
+<a href="https://nodejs.org/en/" target="_blank">Node.js</a>
 
-[Express](https://expressjs.com/)
+<a href="https://expressjs.com/" target="_blank">Express</a>
 
-[MongoDB - Database](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials)
+<a href="https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials" target="_blank">MongoDB - Database</a>
 
-[Robo 3T - MongoDB GUI](https://www.robomongo.org/)
+<a href="https://www.robomongo.org/" target="_blank">Robo 3T - MongoDB GUI</a>
 
-Git clone link: https://github.com/jre23/workout-tracker.git
+Git clone link: htt<span>ps://github.com/jre23/workout-tracker.git</span>
 
 ## Usage
 
