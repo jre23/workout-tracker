@@ -26,98 +26,15 @@ function populateChart(data) {
     totalDuration
   }) => totalDuration);
 
-  // my edits ===
   let allDurations = arrayMaps(data, "duration");
-
-  // let durationsPie = data.map((
-  //   element
-  // ) => element.exercises.map(x => x.duration));
-
-  // let durationsPie2 = durationsPie.map((
-  //   element
-  // ) => {
-  //   if (element.length > 1) {
-  //     element.map(x => allDurations.push(x))
-  //   } else {
-  //     allDurations.push(element[0]);
-  //   }
-  // });
-
   let allWeights = arrayMaps(data, "weight");;
-
-  // let weightsDoughnut = data.map((
-  //   element
-  // ) => element.exercises.map(x => {
-  //   if (x.weight) {
-  //     return x.weight;
-  //   } else {
-  //     return 0;
-  //   }
-  // }));
-
-  // let weightsDoughnut2 = weightsDoughnut.map((element) => {
-  //   if (element.length > 1) {
-  //     element.map(x => allWeights.push(x))
-  //   } else {
-  //     allWeights.push(element[0]);
-  //   }
-  // });
-
-  // console.log("=========data array========");
-  // console.log(data);
-  // // console.log("========durations array========");
-  // // console.log(durationsPie);
-  // // console.log(allDurations);
-  // console.log("=========weights doughnut array========");
-  // console.log(weightsDoughnut);
-  // console.log(allWeights);
-  // ===
-
-  let pounds = calculateTotalWeight(data);
+  let poundsBar = calculateTotalWeight(data);
   let allWorkouts = workoutNames(data); // ===
-  // let noDuplicateWorkouts = [...new Set(allWorkouts)];
-  let noDuplicateWorkouts = [];
-  // console.log("=========workouts array========");
-  // console.log(allWorkouts);
-  // console.log("========Set workouts array========");
-  // console.log(...new Set(allWorkouts));
-
-
-  let workoutsWithDurations = {};
-  let totalDurations = [];
-  let workoutsWithWeights = {};
-  let totalWeights = [];
-
-  allWorkouts.forEach((value, index) => {
-    if (workoutsWithDurations[value]) {
-      workoutsWithDurations[value] += allDurations[index];
-    } else {
-      workoutsWithDurations[value] = allDurations[index];
-    }
-    if (workoutsWithWeights[value]) {
-      workoutsWithWeights[value] += allWeights[index];
-    } else {
-      workoutsWithWeights[value] = allWeights[index];
-    }
-  });
-  for (let key in workoutsWithDurations) {
-    totalDurations.push(workoutsWithDurations[key])
-  };
-  for (let key in workoutsWithWeights) {
-    totalWeights.push(workoutsWithWeights[key])
-    noDuplicateWorkouts.push(key);
-  };
-
-  console.log("========no duplicate workouts=======");
-  console.log(noDuplicateWorkouts);
-  console.log("========workouts with durations object========");
-  console.log(workoutsWithDurations);
-  console.log(totalDurations);
-
-  console.log("========pounds========");
-  console.log(pounds);
-  console.log(workoutsWithWeights);
-  // ===
+  let noDuplicateWorkouts = [...new Set(allWorkouts)];
+  let workoutsWithDurations = addPropertyNumbers(allWorkouts, allDurations);
+  let workoutsWithWeights = addPropertyNumbers(allWorkouts, allWeights);
+  let totalDurationsPie = propertyTotals(workoutsWithDurations);
+  let totalWeightsDoughnut = propertyTotals(workoutsWithWeights);
 
   const colors = generatePalette();
 
@@ -183,7 +100,7 @@ function populateChart(data) {
       labels,
       datasets: [{
         label: 'Pounds',
-        data: pounds,
+        data: poundsBar,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -225,7 +142,7 @@ function populateChart(data) {
       datasets: [{
         label: 'Exercises Performed',
         backgroundColor: colors,
-        data: totalDurations,
+        data: totalDurationsPie,
       }, ],
     },
     options: {
@@ -243,7 +160,7 @@ function populateChart(data) {
       datasets: [{
         label: 'Exercises Performed',
         backgroundColor: colors,
-        data: totalWeights,
+        data: totalWeightsDoughnut,
       }, ],
     },
     options: {
@@ -314,8 +231,29 @@ const arrayMaps = (data, property) => {
       allPropertyData.push(element[0]);
     }
   });
-  console.log(allPropertyData);
   return allPropertyData;
+};
+// this function returns an object that has the added totals for each workout
+const addPropertyNumbers = (allWorkouts, propertyAllValues) => {
+  let propertyObject = {};
+
+  allWorkouts.forEach((value, index) => {
+    if (propertyObject[value]) {
+      propertyObject[value] += propertyAllValues[index];
+    } else {
+      propertyObject[value] = propertyAllValues[index];
+    }
+  });
+  return propertyObject;
+};
+// this function returns an array that corresponds to the totals for each workout
+const propertyTotals = propertyObject => {
+  let propertyTotalsArray = [];
+
+  for (let key in propertyObject) {
+    propertyTotalsArray.push(propertyObject[key])
+  };
+  return propertyTotalsArray;
 };
 
 // get all workout data from back-end
