@@ -1,4 +1,4 @@
-function generatePalette() {
+const generatePalette = () => {
   const arr = [
     '#003f5c',
     '#2f4b7c',
@@ -21,7 +21,7 @@ function generatePalette() {
   return arr;
 }
 
-function populateChart(data) {
+const populateChart = data => {
   let durationsLine = data.map(({
     totalDuration
   }) => totalDuration);
@@ -172,7 +172,7 @@ function populateChart(data) {
   });
 }
 
-function calculateTotalWeight(data) {
+const calculateTotalWeight = data => {
   let totals = [];
 
   data.forEach((workout) => {
@@ -193,7 +193,7 @@ function calculateTotalWeight(data) {
   return totals;
 }
 
-function workoutNames(data) {
+const workoutNames = data => {
   let workouts = [];
 
   data.forEach((workout) => {
