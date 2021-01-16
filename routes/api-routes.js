@@ -26,7 +26,6 @@ router.put("/api/workouts/:id", (req, res) => {
     let workoutId = req.params.id;
     // this if statement takes care of a bug when adding a new exercise. bug: the user can click complete after clicking add exercise and it will submit an empty form
     if (req.body.name.trim().length <= 0) {
-        console.log("test workoutData =============");
         return res.end;
     } else {
         db.Workout.findByIdAndUpdate(workoutId, {

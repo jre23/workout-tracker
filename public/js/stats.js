@@ -22,9 +22,103 @@ function generatePalette() {
 }
 
 function populateChart(data) {
-  let durations = data.map(({ totalDuration }) => totalDuration);
+  let durationsLine = data.map(({
+    totalDuration
+  }) => totalDuration);
+
+  // my edits ===
+  let allDurations = [];
+
+  let durationsPie = data.map((
+    element
+  ) => element.exercises.map(x => x.duration));
+
+  let durationsPie2 = durationsPie.map((
+    element
+  ) => {
+    if (element.length > 1) {
+      element.map(x => allDurations.push(x))
+    } else {
+      allDurations.push(element[0]);
+    }
+  });
+
+  let allWeights = [];
+
+  let weightsDoughnut = data.map((
+    element
+  ) => element.exercises.map(x => {
+    if (x.weight) {
+      return x.weight;
+    } else {
+      return 0;
+    }
+  }));
+
+  let weightsDoughnut2 = weightsDoughnut.map((element) => {
+    if (element.length > 1) {
+      element.map(x => allWeights.push(x))
+    } else {
+      allWeights.push(element[0]);
+    }
+  });
+
+  console.log("=========data array========");
+  console.log(data);
+  // console.log("========durations array========");
+  // console.log(durationsPie);
+  // console.log(allDurations);
+  console.log("=========weights doughnut array========");
+  console.log(weightsDoughnut);
+  console.log(allWeights);
+  // ===
+
   let pounds = calculateTotalWeight(data);
-  let workouts = workoutNames(data);
+  let allWorkouts = workoutNames(data); // ===
+  // let noDuplicateWorkouts = [...new Set(allWorkouts)];
+  let noDuplicateWorkouts = [];
+  console.log("=========workouts array========");
+  console.log(allWorkouts);
+  console.log("========Set workouts array========");
+  console.log(...new Set(allWorkouts));
+
+
+  let workoutsWithDurations = {};
+  let totalDurations = [];
+  let workoutsWithWeights = {};
+  let totalWeights = [];
+
+  allWorkouts.forEach((value, index) => {
+    if (workoutsWithDurations[value]) {
+      workoutsWithDurations[value] += allDurations[index];
+    } else {
+      workoutsWithDurations[value] = allDurations[index];
+    }
+    if (workoutsWithWeights[value]) {
+      workoutsWithWeights[value] += allWeights[index];
+    } else {
+      workoutsWithWeights[value] = allWeights[index];
+    }
+  });
+  for (let key in workoutsWithDurations) {
+    totalDurations.push(workoutsWithDurations[key])
+  };
+  for (let key in workoutsWithWeights) {
+    totalWeights.push(workoutsWithWeights[key])
+    noDuplicateWorkouts.push(key);
+  };
+
+  console.log("========no duplicate workouts=======");
+  console.log(noDuplicateWorkouts);
+  console.log("========workouts with durations object========");
+  console.log(workoutsWithDurations);
+  console.log(totalDurations);
+
+  console.log("========pounds========");
+  console.log(pounds);
+  console.log(workoutsWithWeights);
+  // ===
+
   const colors = generatePalette();
 
   let line = document.querySelector('#canvas').getContext('2d');
@@ -42,7 +136,9 @@ function populateChart(data) {
     'Saturday',
   ];
 
-  const labels = data.map(({ day }) => {
+  const labels = data.map(({
+    day
+  }) => {
     const date = new Date(day);
     return daysOfWeek[date.getDay()];
   });
@@ -51,15 +147,13 @@ function populateChart(data) {
     type: 'line',
     data: {
       labels,
-      datasets: [
-        {
-          label: 'Workout Duration In Minutes',
-          backgroundColor: 'red',
-          borderColor: 'red',
-          data: durations,
-          fill: false,
-        },
-      ],
+      datasets: [{
+        label: 'Workout Duration In Minutes',
+        backgroundColor: 'red',
+        borderColor: 'red',
+        data: durationsLine,
+        fill: false,
+      }, ],
     },
     options: {
       responsive: true,
@@ -67,22 +161,18 @@ function populateChart(data) {
         display: true,
       },
       scales: {
-        xAxes: [
-          {
+        xAxes: [{
+          display: true,
+          scaleLabel: {
             display: true,
-            scaleLabel: {
-              display: true,
-            },
           },
-        ],
-        yAxes: [
-          {
+        }, ],
+        yAxes: [{
+          display: true,
+          scaleLabel: {
             display: true,
-            scaleLabel: {
-              display: true,
-            },
           },
-        ],
+        }, ],
       },
     },
   });
@@ -91,29 +181,27 @@ function populateChart(data) {
     type: 'bar',
     data: {
       labels,
-      datasets: [
-        {
-          label: 'Pounds',
-          data: pounds,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
-          borderWidth: 1,
-        },
-      ],
+      datasets: [{
+        label: 'Pounds',
+        data: pounds,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1,
+      }, ],
     },
     options: {
       title: {
@@ -121,13 +209,11 @@ function populateChart(data) {
         text: 'Pounds Lifted',
       },
       scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-            },
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
           },
-        ],
+        }, ],
       },
     },
   });
@@ -135,14 +221,12 @@ function populateChart(data) {
   let pieChart = new Chart(pie, {
     type: 'pie',
     data: {
-      labels: workouts,
-      datasets: [
-        {
-          label: 'Exercises Performed',
-          backgroundColor: colors,
-          data: durations,
-        },
-      ],
+      labels: noDuplicateWorkouts,
+      datasets: [{
+        label: 'Exercises Performed',
+        backgroundColor: colors,
+        data: totalDurations,
+      }, ],
     },
     options: {
       title: {
@@ -155,14 +239,12 @@ function populateChart(data) {
   let donutChart = new Chart(pie2, {
     type: 'doughnut',
     data: {
-      labels: workouts,
-      datasets: [
-        {
-          label: 'Exercises Performed',
-          backgroundColor: colors,
-          data: pounds,
-        },
-      ],
+      labels: noDuplicateWorkouts,
+      datasets: [{
+        label: 'Exercises Performed',
+        backgroundColor: colors,
+        data: totalWeights,
+      }, ],
     },
     options: {
       title: {
@@ -177,7 +259,10 @@ function calculateTotalWeight(data) {
   let totals = [];
 
   data.forEach((workout) => {
-    const workoutTotal = workout.exercises.reduce((total, { type, weight }) => {
+    const workoutTotal = workout.exercises.reduce((total, {
+      type,
+      weight
+    }) => {
       if (type === 'resistance') {
         return total + weight;
       } else {
@@ -200,8 +285,7 @@ function workoutNames(data) {
     });
   });
 
-  // return de-duplicated array with JavaScript `Set` object
-  return [...new Set(workouts)];
+  return workouts;
 }
 
 // get all workout data from back-end
