@@ -22,23 +22,15 @@ The goal for this project was to build an app where users can track their workou
 
 ## Screenshots
 
-![workout tracker screenshot 1]()
+![workout tracker screenshot 1](https://user-images.githubusercontent.com/69170823/104789545-3b5bcb00-574a-11eb-96c0-3f55125a4802.png)
 
-![workout tracker screenshot 2]()
+![workout tracker screenshot 2](https://user-images.githubusercontent.com/69170823/104789585-54647c00-574a-11eb-8e87-0dd896dc9728.png)
 
-![workout tracker screenshot 3]()
+![workout tracker screenshot 3](https://user-images.githubusercontent.com/69170823/104789637-7bbb4900-574a-11eb-86ed-52967e46edcc.png)
 
-![workout tracker screenshot 4]()
+![workout tracker screenshot 4](https://user-images.githubusercontent.com/69170823/104789657-8b3a9200-574a-11eb-83c9-3418598d4f7a.png)
 
-![workout tracker screenshot 5]()
-
-![workout tracker screenshot 6]()
-
-![workout tracker screenshot 7]()
-
-![workout tracker screenshot 8]()
-
-![workout tracker screenshot 9]()
+![workout tracker screenshot 5](https://user-images.githubusercontent.com/69170823/104789830-e66c8480-574a-11eb-83a3-afe0ba429ea1.png)
 
 ## Technologies
 
@@ -62,19 +54,19 @@ Visual Studio Code: 1.48.2
 Google Chrome: 78.0.3904.130
 Git for Windows: 2.28.0.1
 
-<a href="https://nodejs.org/en/" target="_blank">Node.js</a>
+[Node.js](https://nodejs.org/en/)
 
-<a href="https://expressjs.com/" target="_blank">Express</a>
+[Express](https://expressjs.com/)
 
-<a href="https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials" target="_blank">MongoDB - Database</a>
+[MongoDB - Database](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials)
 
-<a href="https://www.robomongo.org/" target="_blank">Robo 3T - MongoDB GUI</a>
+[Robo 3T](https://www.robomongo.org/)
 
 Git clone link: htt<span>ps://github.com/jre23/workout-tracker.git</span>
 
 ## Usage
 
-To run this application on a local machine, make sure all of the programs (or similar) listed in [Installation](#Installation) are installed. Use the provided seeds.js file to build the MongoDB database. Clone the repo using the above Git clone link. Navigate to the local repository on your machine where you've cloned it using Git Bash/Terminal and in the directory containing the server.js file. Make sure to install any dependencies using "npm i" (reference the included package.json file). Then use "npm start" to run the app!
+To run this application on a local machine, make sure all of the programs (or similar) listed in [Installation](#Installation) are installed. Use the provided seeds.js file to build the MongoDB database (or input your own). Clone the repo using the above Git clone link. Navigate to the local repository on your machine where you've cloned it using Git Bash/Terminal and in the directory containing the server.js file. Make sure to install any dependencies using "npm i" (reference the included package.json file). Then use "npm start" to run the app!
 
 ## Credits
 
