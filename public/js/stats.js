@@ -27,60 +27,60 @@ function populateChart(data) {
   }) => totalDuration);
 
   // my edits ===
-  let allDurations = [];
+  let allDurations = arrayMaps(data, "duration");
 
-  let durationsPie = data.map((
-    element
-  ) => element.exercises.map(x => x.duration));
+  // let durationsPie = data.map((
+  //   element
+  // ) => element.exercises.map(x => x.duration));
 
-  let durationsPie2 = durationsPie.map((
-    element
-  ) => {
-    if (element.length > 1) {
-      element.map(x => allDurations.push(x))
-    } else {
-      allDurations.push(element[0]);
-    }
-  });
+  // let durationsPie2 = durationsPie.map((
+  //   element
+  // ) => {
+  //   if (element.length > 1) {
+  //     element.map(x => allDurations.push(x))
+  //   } else {
+  //     allDurations.push(element[0]);
+  //   }
+  // });
 
-  let allWeights = [];
+  let allWeights = arrayMaps(data, "weight");;
 
-  let weightsDoughnut = data.map((
-    element
-  ) => element.exercises.map(x => {
-    if (x.weight) {
-      return x.weight;
-    } else {
-      return 0;
-    }
-  }));
+  // let weightsDoughnut = data.map((
+  //   element
+  // ) => element.exercises.map(x => {
+  //   if (x.weight) {
+  //     return x.weight;
+  //   } else {
+  //     return 0;
+  //   }
+  // }));
 
-  let weightsDoughnut2 = weightsDoughnut.map((element) => {
-    if (element.length > 1) {
-      element.map(x => allWeights.push(x))
-    } else {
-      allWeights.push(element[0]);
-    }
-  });
+  // let weightsDoughnut2 = weightsDoughnut.map((element) => {
+  //   if (element.length > 1) {
+  //     element.map(x => allWeights.push(x))
+  //   } else {
+  //     allWeights.push(element[0]);
+  //   }
+  // });
 
-  console.log("=========data array========");
-  console.log(data);
-  // console.log("========durations array========");
-  // console.log(durationsPie);
-  // console.log(allDurations);
-  console.log("=========weights doughnut array========");
-  console.log(weightsDoughnut);
-  console.log(allWeights);
+  // console.log("=========data array========");
+  // console.log(data);
+  // // console.log("========durations array========");
+  // // console.log(durationsPie);
+  // // console.log(allDurations);
+  // console.log("=========weights doughnut array========");
+  // console.log(weightsDoughnut);
+  // console.log(allWeights);
   // ===
 
   let pounds = calculateTotalWeight(data);
   let allWorkouts = workoutNames(data); // ===
   // let noDuplicateWorkouts = [...new Set(allWorkouts)];
   let noDuplicateWorkouts = [];
-  console.log("=========workouts array========");
-  console.log(allWorkouts);
-  console.log("========Set workouts array========");
-  console.log(...new Set(allWorkouts));
+  // console.log("=========workouts array========");
+  // console.log(allWorkouts);
+  // console.log("========Set workouts array========");
+  // console.log(...new Set(allWorkouts));
 
 
   let workoutsWithDurations = {};
@@ -287,6 +287,36 @@ function workoutNames(data) {
 
   return workouts;
 }
+// this function returns all of the weights or durations for each exercise
+const arrayMaps = (data, property) => {
+  let allPropertyData = [];
+
+  let firstMap = data.map((
+    element
+  ) => element.exercises.map(x => {
+    if (property === "duration") {
+      return x.duration;
+    } else if (property === "weight") {
+      if (x.weight) {
+        return x.weight;
+      } else {
+        return 0;
+      }
+    }
+  }));
+
+  let secondMap = firstMap.map((
+    element
+  ) => {
+    if (element.length > 1) {
+      element.map(x => allPropertyData.push(x))
+    } else {
+      allPropertyData.push(element[0]);
+    }
+  });
+  console.log(allPropertyData);
+  return allPropertyData;
+};
 
 // get all workout data from back-end
 API.getWorkoutsInRange().then(populateChart);
