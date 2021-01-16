@@ -17,7 +17,7 @@ const newWorkout = document.querySelector(".new-workout")
 let workoutType = null;
 let shouldNavigateAway = false;
 
-async function initExercise() {
+const initExercise = async () => {
   let workout;
 
   if (location.search.split("=")[1] === undefined) {
@@ -32,7 +32,7 @@ async function initExercise() {
 
 initExercise();
 
-function handleWorkoutTypeChange(event) {
+const handleWorkoutTypeChange = event => {
   workoutType = event.target.value;
 
   if (workoutType === "cardio") {
@@ -49,7 +49,7 @@ function handleWorkoutTypeChange(event) {
   validateInputs();
 }
 
-function validateInputs() {
+const validateInputs = () => {
   let isValid = true;
 
   if (workoutType === "resistance") {
@@ -95,7 +95,7 @@ function validateInputs() {
   }
 }
 
-async function handleFormSubmit(event) {
+const handleFormSubmit = async event => {
   event.preventDefault();
 
   let workoutData = {};
@@ -119,14 +119,14 @@ async function handleFormSubmit(event) {
   toast.classList.add("success");
 }
 
-function handleToastAnimationEnd() {
+const handleToastAnimationEnd = () => {
   toast.removeAttribute("class");
   if (shouldNavigateAway) {
     location.href = "/";
   }
 }
 
-function clearInputs() {
+const clearInputs = () => {
   cardioNameInput.value = "";
   nameInput.value = "";
   setsInput.value = "";
@@ -141,7 +141,7 @@ if (workoutTypeSelect) {
   workoutTypeSelect.addEventListener("change", handleWorkoutTypeChange);
 }
 if (completeButton) {
-  completeButton.addEventListener("click", function (event) {
+  completeButton.addEventListener("click", event => {
     shouldNavigateAway = true;
     handleFormSubmit(event);
   });
