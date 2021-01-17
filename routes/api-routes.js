@@ -58,7 +58,6 @@ router.get("/api/workouts/range", (req, res) => {
     db.Workout.aggregate([{
                 $sort: {
                     day: -1
-
                 }
             },
             {
@@ -67,7 +66,6 @@ router.get("/api/workouts/range", (req, res) => {
             {
                 $sort: {
                     day: 1
-
                 }
             },
             {
