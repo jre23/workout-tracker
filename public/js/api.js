@@ -21,6 +21,8 @@ const API = {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
+    }).catch((e) => {
+      console.log(e)
     });
 
     const json = await res.json().catch((e) => {
@@ -36,6 +38,8 @@ const API = {
       headers: {
         "Content-Type": "application/json"
       }
+    }).catch((e) => {
+      console.log(e)
     });
 
     const json = await res.json().catch((e) => {
@@ -46,7 +50,9 @@ const API = {
   },
 
   async getWorkoutsInRange() {
-    const res = await fetch(`/api/workouts/range`);
+    const res = await fetch(`/api/workouts/range`).catch((e) => {
+      console.log(e)
+    });
     const json = await res.json().catch((e) => {
       console.log(e)
     });
