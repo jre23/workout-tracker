@@ -30,7 +30,7 @@ The goal for this project was to build an app where users can track their workou
 
 ![workout tracker screenshot 4](https://user-images.githubusercontent.com/69170823/104789657-8b3a9200-574a-11eb-83c9-3418598d4f7a.png)
 
-![workout tracker screenshot 5](https://user-images.githubusercontent.com/69170823/104789830-e66c8480-574a-11eb-83a3-afe0ba429ea1.png)
+![workout tracker screenshot 5](https://user-images.githubusercontent.com/69170823/104834475-63375580-5854-11eb-9b2c-a606d0b302e9.png)
 
 ## Technologies
 
