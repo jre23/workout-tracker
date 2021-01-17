@@ -41,7 +41,7 @@ Please see the following for a list of technologies used in this project:
 * Express
 * MongoDB
 * Robo 3T
-* Mongoose ODM
+* Mongoose.js
 * Git Bash
 * Heroku
 
