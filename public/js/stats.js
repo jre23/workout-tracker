@@ -257,4 +257,6 @@ const propertyTotals = propertyObject => {
 };
 
 // get all workout data from back-end
-API.getWorkoutsInRange().then(populateChart);
+API.getWorkoutsInRange().then(populateChart).catch((e) => {
+  console.log(e)
+});;
